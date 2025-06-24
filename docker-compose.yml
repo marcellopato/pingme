@@ -19,7 +19,7 @@ services:
       - ./backend:/var/www/html
     ports:
       - "8000:8000"
-    command: sh -c "composer install && php artisan serve --host=0.0.0.0 --port=8000"
+    command: sh -c "apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo_pgsql pgsql && composer install && php artisan serve --host=0.0.0.0 --port=8000"
     environment:
       - DB_CONNECTION=pgsql
       - DB_HOST=${DB_HOST}

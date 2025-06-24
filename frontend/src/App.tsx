@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import NameSuggestions from "./components/NameSuggestions";
+import PostPage from './pages/PostPage';
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/post/:id" element={<PostPage />} />
             <Route path="/names" element={<NameSuggestions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
