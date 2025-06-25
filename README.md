@@ -1,7 +1,3 @@
-Here’s a draft in English for your README, including your requested content, with the logo centered and Docker instructions. Please adjust the logo path if needed.
-
----
-
 <p align="center">
   <img src="logo.png" alt="PingMe Logo" width="200"/>
 </p>
@@ -63,5 +59,3 @@ Contributions are welcome! If you have suggestions or want to help develop new f
 This project is licensed under the MIT License.
 
 ---
-
-Let me know if you would like this in Markdown format for direct copy-paste!
