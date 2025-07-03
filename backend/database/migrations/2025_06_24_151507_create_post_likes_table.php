@@ -11,14 +11,14 @@ class CreatePostLikesTable extends Migration
      */
     public function up(): void
     {
-        // Schema::create('post_likes', function (Blueprint $table) {
-        //     $table->uuid('id')->primary();
-        //     $table->uuid('post_id');
-        //     $table->string('user_id');
-        //     $table->timestampTz('created_at')->nullable();
-
-        //     $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-        // });
+        Schema::create('post_likes', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+            
+            $table->unique(['post_id', 'user_id']);
+        });
     }
 
     /**
@@ -26,6 +26,6 @@ class CreatePostLikesTable extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('post_likes');
+        Schema::dropIfExists('post_likes');
     }
 }

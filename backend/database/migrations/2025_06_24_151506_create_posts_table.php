@@ -11,18 +11,21 @@ class CreatePostsTable extends Migration
      */
     public function up(): void
     {
-        // Schema::create('posts', function (Blueprint $table) {
-        //     $table->uuid('id')->primary();
-        //     $table->text('content');
-        //     $table->string('author_name');
-        //     $table->string('author_username');
-        //     $table->text('author_avatar')->nullable();
-        //     $table->text('image_url')->nullable();
-        //     $table->integer('likes_count')->default(0);
-        //     $table->integer('comments_count')->default(0);
-        //     $table->integer('retweets_count')->default(0);
-        //     $table->timestampTz('created_at')->nullable();
-        // });
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text('content');
+            $table->string('image_url')->nullable();
+            $table->integer('likes_count')->default(0);
+            $table->integer('comments_count')->default(0);
+            $table->integer('retweets_count')->default(0);
+            $table->boolean('has_extension')->default(false);
+            $table->boolean('extension_used')->default(false);
+            $table->json('hashtags')->nullable();
+            $table->json('mentions')->nullable();
+            $table->json('links')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -30,6 +33,6 @@ class CreatePostsTable extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('posts');
+        Schema::dropIfExists('posts');
     }
 }
