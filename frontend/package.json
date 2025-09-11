@@ -3,6 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "keywords": [
+    "react",
+    "typescript", 
+    "social-network",
+    "open-source",
+    "docker",
+    "laravel",
+    "internationalization",
+    "collaboration", 
+    "community",
+    "twitter-clone",
+    "threads-clone"
+  ],
   "scripts": {
     "dev": "vite --host --port 5173",
     "build": "vite build",

@@ -2,7 +2,19 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel", 
+        "framework", 
+        "social-network", 
+        "open-source", 
+        "docker", 
+        "typescript", 
+        "internationalization", 
+        "collaboration", 
+        "community", 
+        "twitter-clone", 
+        "threads-clone"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
