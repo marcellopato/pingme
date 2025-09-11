@@ -48,6 +48,37 @@ This command will start both the frontend and backend containers.
 
 ---
 
+## CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and automated testing. The CI pipeline runs on every push to `main` or `develop` branches and on pull requests.
+
+### Email Notifications
+
+The CI system sends email notifications for build results (both successes and failures) to the repository maintainer. To enable email notifications, the following repository secrets must be configured:
+
+#### Required SMTP Secrets
+
+Configure these secrets in your repository settings under **Settings → Secrets and variables → Actions**:
+
+- `SMTP_SERVER` - SMTP server hostname (e.g., `smtp.gmail.com`, `smtp.outlook.com`)
+- `SMTP_PORT` - SMTP server port (e.g., `587` for TLS, `465` for SSL)
+- `SMTP_USERNAME` - SMTP username/email for authentication
+- `SMTP_PASSWORD` - SMTP password or app-specific password
+- `MAINTAINER_EMAIL` - Email address to receive CI notifications (e.g., `YOUR_EMAIL@EXAMPLE.COM`)
+
+#### Example Gmail Configuration
+
+For Gmail, you would set:
+- `SMTP_SERVER`: `smtp.gmail.com`
+- `SMTP_PORT`: `587`
+- `SMTP_USERNAME`: Your Gmail address
+- `SMTP_PASSWORD`: Your Gmail app password (not your regular password)
+- `MAINTAINER_EMAIL`: Email where you want to receive notifications
+
+**Note:** For Gmail, you need to use an [App Password](https://support.google.com/accounts/answer/185833) instead of your regular password.
+
+---
+
 ## Contributing
 
 Contributions are welcome! If you have suggestions or want to help develop new features, feel free to open an issue or pull request.
