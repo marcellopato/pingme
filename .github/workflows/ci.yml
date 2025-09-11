@@ -62,7 +62,7 @@ jobs:
       # Step 7: Run Laravel tests using artisan test command
       - name: Execute Laravel tests
         working-directory: ./backend
-        run: php artisan test --verbose
+        run: php artisan test
 
   # Frontend React/TypeScript Job with Node.js Matrix Strategy  
   frontend-tests:

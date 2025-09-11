@@ -52,6 +52,45 @@ This command will start both the frontend and backend containers.
 
 Contributions are welcome! If you have suggestions or want to help develop new features, feel free to open an issue or pull request.
 
+### Development Setup
+
+This project uses a full-stack architecture with:
+- **Backend**: Laravel (PHP 8.1+) 
+- **Frontend**: React with TypeScript and Vite
+
+### CI/CD Pipeline
+
+The project includes a comprehensive GitHub Actions workflow that:
+
+- **Triggers**: On pushes and pull requests to `main` and `develop` branches
+- **Matrix Testing**: Tests multiple versions for reliability
+  - PHP: 8.1, 8.2 
+  - Node.js: 18.x, 20.x
+- **Caching**: Composer and npm dependencies for faster builds
+- **Backend Tests**: Laravel environment setup + PHPUnit tests
+- **Frontend Tests**: ESLint linting + TypeScript compilation + Build verification
+- **Quality Gates**: Fails on any test or lint errors
+
+#### Running Tests Locally
+
+**Backend (Laravel):**
+```bash
+cd backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan test
+```
+
+**Frontend (React/TypeScript):**
+```bash
+cd frontend
+npm install
+npm run lint    # ESLint code quality checks
+npm test        # TypeScript compilation check
+npm run build   # Production build verification
+```
+
 ---
 
 ## License
