@@ -2,6 +2,24 @@
   <img src="logo.png" alt="PingMe Logo" width="200"/>
 </p>
 
+<p align="center">
+  <a href="https://github.com/marcellopato/pingme/actions">
+    <img src="https://github.com/marcellopato/pingme/workflows/CI/badge.svg" alt="Build Status"/>
+  </a>
+  <a href="#license">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"/>
+  </a>
+  <a href="https://github.com/marcellopato/pingme/issues">
+    <img src="https://img.shields.io/github/issues/marcellopato/pingme" alt="Open Issues"/>
+  </a>
+  <a href="https://github.com/marcellopato/pingme/pulls">
+    <img src="https://img.shields.io/github/issues-pr/marcellopato/pingme" alt="Open PRs"/>
+  </a>
+  <a href="https://github.com/marcellopato/pingme/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/marcellopato/pingme" alt="Contributors"/>
+  </a>
+</p>
+
 # PingMe
 
 PingMe is a new social network inspired by X (formerly Twitter) and Threads. It lets you share posts of up to **500 characters**. If you need a bit more space to complete your idea or reasoning, you can request an extra **100 characters**.
