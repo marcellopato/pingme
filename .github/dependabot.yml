@@ -1,0 +1,28 @@
+# Dependabot configuration for pingme monorepo
+# Enables automatic dependency updates for PHP/Laravel (composer) and Node.js (npm) dependencies
+
+version: 2
+updates:
+  # Backend PHP dependencies (Laravel/Composer)
+  - package-ecosystem: "composer"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    
+  # Backend Node.js dependencies (Vite build tools)
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    
+  # Frontend Node.js dependencies (React application)
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
