@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "test": "tsc --noEmit && echo 'TypeScript compilation check passed!'",
     "preview": "vite preview"
   },
   "dependencies": {

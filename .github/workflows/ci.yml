@@ -1,0 +1,124 @@
+name: CI/CD Pipeline
+
+# Trigger workflow on pushes and pull requests to main and develop branches
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Backend Laravel Job with PHP Matrix Strategy
+  backend-tests:
+    name: Backend Tests (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    
+    # Matrix strategy for testing multiple PHP versions
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.2']
+    
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup PHP with extensions required by Laravel
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+          coverage: none
+
+      # Step 3: Get Composer Cache Directory for caching dependencies
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      # Step 4: Cache Composer dependencies for faster builds
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      # Step 5: Install Composer dependencies (production optimized)
+      - name: Install Composer dependencies
+        working-directory: ./backend
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+      # Step 6: Setup Laravel environment file from example
+      - name: Create Laravel environment file
+        working-directory: ./backend
+        run: |
+          cp .env.example .env
+          php artisan key:generate --ansi --force
+
+      # Step 7: Run Laravel tests using artisan test command
+      - name: Execute Laravel tests
+        working-directory: ./backend
+        run: php artisan test --verbose
+
+  # Frontend React/TypeScript Job with Node.js Matrix Strategy  
+  frontend-tests:
+    name: Frontend Tests (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    
+    # Matrix strategy for testing multiple Node.js versions
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['18.x', '20.x']
+    
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js with specified version
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: './frontend/package-lock.json'
+
+      # Step 3: Install npm dependencies
+      - name: Install npm dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      # Step 4: Run ESLint for code quality checks
+      - name: Run ESLint
+        working-directory: ./frontend
+        run: npm run lint
+
+      # Step 5: Run TypeScript compilation tests
+      - name: Run frontend tests
+        working-directory: ./frontend
+        run: npm test
+
+      # Step 6: Build production bundle to verify build process
+      - name: Build production bundle
+        working-directory: ./frontend
+        run: npm run build
+
+  # Combined job that depends on both backend and frontend success
+  deployment-ready:
+    name: Deployment Ready
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    
+    steps:
+      # This job only runs if both backend-tests and frontend-tests pass
+      - name: All tests passed
+        run: |
+          echo "🎉 All tests passed successfully!"
+          echo "✅ Backend tests completed for all PHP versions"
+          echo "✅ Frontend tests completed for all Node.js versions"
+          echo "🚀 Application is ready for deployment"
