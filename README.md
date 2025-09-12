@@ -8,6 +8,10 @@ PingMe is a new social network inspired by X (formerly Twitter) and Threads. It 
 
 Swearing is not allowed, encouraging users to be creative in expressing their messages. You can use `#` for hashtags and `@` to mention people. By using the combination `?@`, you can view a list of your most recent posts and select one to complement your current post or reply.
 
+## Topics
+
+This project encompasses: `social-network` • `open-source` • `docker` • `laravel` • `react` • `typescript` • `internationalization` • `collaboration` • `community` • `twitter-clone` • `threads-clone`
+
 **Features:**
 - Post messages (up to 500 characters, or 600 with extension)
 - No swearing allowed (for more creative communication)
